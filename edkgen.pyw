@@ -4,7 +4,7 @@
 #created at 02.01.2007
 
 from wx import *
-from ed2k_withaich import *
+from ed2k import *
 import threading
 
 import os.path
