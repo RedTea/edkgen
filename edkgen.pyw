@@ -58,7 +58,7 @@ class ED2KDialog(Dialog):
         Dialog.__init__(self, parent, id, title)
         self.OnInit()
         self.filepath = None
-
+    
     def OnInit(self):
         self.start = Button(self,101,'Start',(10,50))
         self.start.Disable()
@@ -74,7 +74,14 @@ class ED2KDialog(Dialog):
         
         self.process = Gauge(self,-1,100,(20,20),(200,20))
         self.process.SetValue(0)
-
+        
+        self.result = TextCtrl(self,-1,'',(10,100),(220,50))
+        self.result.SetEditable(False)
+        self.result.SetValue('zzz')
+        #self.result.WriteText('ccc')
+        self.result.SelectAll()
+        self.result.Cut()
+    
     def OnOpenClick(self,event):
         filedlg = FileDialog(self,message='Select File',style=wx.FD_OPEN)
         filedlg.ShowModal()
