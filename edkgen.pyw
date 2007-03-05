@@ -8,7 +8,7 @@ from ed2k import *
 import threading
 
 import os.path
-
+'''
 def calc(dlg):
     f = PartFile()
     f.Attach(dlg.filepath)
@@ -23,6 +23,7 @@ def calc(dlg):
     
     dlg.start.Enable()
     dlg.cancel.Disable()
+'''
 
 class Working(threading.Thread):
 
@@ -48,6 +49,9 @@ class Working(threading.Thread):
         
         self.dlg.start.Enable()
         self.dlg.cancel.Disable()
+        
+        ed2k = "ed2k://|file|"+self.f.GetNAME()+"|"+self.f.GetSIZE()+"|"+self.f.GetED2K()+"|h="+self.f.GetAICH()+"|/"
+        self.dlg.result.SetValue(ed2k)
     
     def cancel(self):
         self.f.cancel = True
@@ -72,15 +76,16 @@ class ED2KDialog(Dialog):
         self.open.Enable()
         EVT_BUTTON(self,100, self.OnOpenClick)
         
-        self.process = Gauge(self,-1,100,(20,20),(200,20))
+        self.process = Gauge(self,-1,100,(10,20),(240,20))
         self.process.SetValue(0)
         
-        self.result = TextCtrl(self,-1,'',(10,100),(220,50))
+        self.result = TextCtrl(self,-1,'',(10,100),(240,50))
+        #self.result.Disable()
         self.result.SetEditable(False)
-        self.result.SetValue('zzz')
+        #self.result.SetValue('zzz')
         #self.result.WriteText('ccc')
         self.result.SelectAll()
-        self.result.Cut()
+        #self.result.Cut()
     
     def OnOpenClick(self,event):
         filedlg = FileDialog(self,message='Select File',style=wx.FD_OPEN)
@@ -90,6 +95,7 @@ class ED2KDialog(Dialog):
         if(os.path.isfile(self.filepath)):
             print self.filepath
             self.start.Enable()
+            self.result.SetValue('')
         else:
             self.filepath = ''
             self.start.Disable()
