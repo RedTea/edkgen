@@ -232,9 +232,8 @@ class PartFile:
         return str(self.size).upper()
     
     def GetNAME(self):
-        #print basename(self.path)
-        return urllib.pathname2url(basename(self.path))
-
+        #return urllib.quote(basename(self.path))
+        return basename(self.path)
 
 if __name__=='__main__':
     
@@ -249,9 +248,9 @@ if __name__=='__main__':
             v = True
             while(v):
                 v = s.next()
-                if(v):
-                    print v
-            print '100% Finished'
+                #if(v):
+                    #print v
+            #print '100% Finished'
             
             #print "ed2k://|file|"+f.GetNAME()+"|"+f.GetSIZE()+"|"+f.GetED2K()+"|h="+f.GetAICH()+"|/"
             print f.GetNAME()

@@ -90,10 +90,11 @@ class ED2KDialog(Dialog):
     def OnOpenClick(self,event):
         filedlg = FileDialog(self,message='Select File',style=wx.FD_OPEN)
         filedlg.ShowModal()
-        self.filepath = filedlg.GetDirectory()+'/'+filedlg.GetFilename()
-        print self.filepath 
+        #print repr(filedlg.GetDirectory())
+        self.filepath = filedlg.GetDirectory() + u'/' + filedlg.GetFilename()
+        #print self.filepath 
         if(os.path.isfile(self.filepath)):
-            print self.filepath
+            #print self.filepath
             self.start.Enable()
             self.result.SetValue('')
         else:
